@@ -13,10 +13,18 @@
       </Content>
     </ItemGroup>
 
+
+
     <ItemGroup>
-      <Folder Include="src\Model\" />
-      <Folder Include="src\Repository\" />
-      <Folder Include="src\Service\" />
+      <PackageReference Include="Json.Net" Version="1.0.33" />
+      <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
+
+
+
+
+
+
 
 </Project>
