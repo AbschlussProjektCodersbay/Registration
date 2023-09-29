@@ -16,13 +16,9 @@ public class ServiceNewUser
     public void CreateUser()
     {
         var data =DataToModel(userData);
-        var isValid =  checkNewUser(data.email, data.password);
-        if (!isValid)
-        {
-            return ;
-        }
+        CheckNewUser(data.email, data.password);
         Console.WriteLine("save");
-        saveUser(data);
+        SaveUser(data);
         
 
     }
@@ -37,7 +33,7 @@ public class ServiceNewUser
         return userModel;
     }
 
-    private async void saveUser(ModelNewUser user)
+    private async void SaveUser(ModelNewUser user)
     {
         var repo = new RepoNewUser();
         var collection = repo.GetUserCollection();
@@ -46,10 +42,10 @@ public class ServiceNewUser
     
     
 
-    private bool checkNewUser(String email, String password)
+    private void CheckNewUser(string email, string password)
     {
         var validator = new ValidateData();
-        return  validator.isValid(email,password);
+        validator.IsValid(email, password);
     }
     
     
