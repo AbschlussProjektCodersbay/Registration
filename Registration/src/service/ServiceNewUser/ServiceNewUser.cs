@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices.JavaScript;
+using MongoDB.Bson;
 using Registration.model;
 using Registration.repo;
 
@@ -20,7 +21,6 @@ public class ServiceNewUser
         Console.WriteLine("save");
         SaveUser(data);
         
-
     }
     
     private  ModelNewUser DataToModel(Stream data)
@@ -33,11 +33,11 @@ public class ServiceNewUser
         return userModel;
     }
 
-    private async void SaveUser(ModelNewUser user)
+    private void SaveUser(ModelNewUser user)
     {
         var repo = new RepoNewUser();
         var collection = repo.GetUserCollection();
-        await collection.InsertOneAsync(user);
+        collection.InsertOne(user);
     }
     
     
