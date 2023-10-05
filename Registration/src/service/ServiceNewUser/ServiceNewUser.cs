@@ -16,7 +16,7 @@ public class ServiceNewUser
 
     public void CreateUser()
     {
-        var data =DataToModel(userData);
+        var data = DataToModel(userData);
         CheckNewUser(data.email, data.password);
         Console.WriteLine("save");
         SaveUser(data);
@@ -44,8 +44,7 @@ public class ServiceNewUser
 
     private void CheckNewUser(string email, string password)
     {
-        var validator = new ValidateData();
-        validator.IsValid(email, password);
+        new ValidateData().IsValid(email, password);
     }
     
     

@@ -12,8 +12,7 @@ public class RepoNewUser
     {
         var settings = MongoClientSettings.FromConnectionString(Properties.mongodbConnectionString);
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-        var client = new MongoClient(settings);
-        return client;
+        return new MongoClient(settings);
     } 
     
     private MongoClient? GetConnection()
