@@ -8,21 +8,20 @@ public class RepoNewUser
 {
     private  static MongoClient? _connection;
     
-    private MongoClient? createClient()
+    private MongoClient? CreateClient()
     {
         var settings = MongoClientSettings.FromConnectionString(Properties.mongodbConnectionString);
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-        var client = new MongoClient(settings);
-        return client;
+        return new MongoClient(settings);
     } 
     
-    private MongoClient? getConnection()
+    private MongoClient? GetConnection()
     {
         
         if(_connection == null)
         {
             Console.WriteLine("_connection");
-            _connection = createClient();
+            _connection = CreateClient();
         }
         Console.WriteLine("old");
         return _connection;
@@ -30,7 +29,7 @@ public class RepoNewUser
 
     public IMongoCollection<ModelNewUser> GetUserCollection()
     {
-        var con = getConnection();
+        var con = GetConnection();
         var db = con.GetDatabase("userManagement");
         var mongoCollection = db.GetCollection<ModelNewUser>("UserLoginData");
         return mongoCollection;

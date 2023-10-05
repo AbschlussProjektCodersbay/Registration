@@ -30,8 +30,6 @@ app.MapPost("/registration/newUser",  (HttpRequest request) =>
         return Results.Conflict("The Mail have a invalid Syntax");
     }
     
-    
-    
     return Results.Json("Successful Registration",statusCode: 200);
 });
 

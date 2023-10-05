@@ -8,15 +8,15 @@ namespace Registration.service;
 public class ValidateData
 {
     
-    public bool isValid(String email, String password)
+    public bool IsValid(string email, string password)
     {
-        validMail(email);
-        checkPassword(password);
-        isMailNotExisting(email);
+        ValidMail(email);
+        CheckPassword(password);
+        IsMailNotExisting(email);
         return true;
     }
 
-    private void validMail(String email)
+    private void ValidMail(string email)
     {
         var emailValidation = new EmailAddressAttribute();
         if  (!emailValidation.IsValid(email))
@@ -25,7 +25,7 @@ public class ValidateData
         }
     }
 
-    private void checkPassword(String password)
+    private void CheckPassword(string password)
     {
         if (password.Length < 8)
         {
@@ -35,7 +35,7 @@ public class ValidateData
     }
 
     
-    private void isMailNotExisting(String mail)
+    private void IsMailNotExisting(string mail)
     {
         var repo = new RepoNewUser();
         var collection = repo.GetUserCollection();

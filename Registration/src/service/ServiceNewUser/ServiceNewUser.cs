@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices.JavaScript;
+using MongoDB.Bson;
 using Registration.model;
 using Registration.repo;
 
@@ -15,16 +16,11 @@ public class ServiceNewUser
 
     public void CreateUser()
     {
-        var data =DataToModel(userData);
-        var isValid =  checkNewUser(data.email, data.password);
-        if (!isValid)
-        {
-            return ;
-        }
+        var data = DataToModel(userData);
+        CheckNewUser(data.email, data.password);
         Console.WriteLine("save");
-        saveUser(data);
+        SaveUser(data);
         
-
     }
     
     private  ModelNewUser DataToModel(Stream data)
@@ -37,19 +33,18 @@ public class ServiceNewUser
         return userModel;
     }
 
-    private async void saveUser(ModelNewUser user)
+    private void SaveUser(ModelNewUser user)
     {
         var repo = new RepoNewUser();
         var collection = repo.GetUserCollection();
-        await collection.InsertOneAsync(user);
+        collection.InsertOne(user);
     }
     
     
 
-    private bool checkNewUser(String email, String password)
+    private void CheckNewUser(string email, string password)
     {
-        var validator = new ValidateData();
-        return  validator.isValid(email,password);
+        new ValidateData().IsValid(email, password);
     }
     
     
