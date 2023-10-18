@@ -15,4 +15,6 @@ public class ModelNewUser
     public string email { get; set; }
     public string password { get; set; }
     public DateOnly joineDate { get; set; }
+
+    public List<UserAddress> Addresses { get; set; }
 }

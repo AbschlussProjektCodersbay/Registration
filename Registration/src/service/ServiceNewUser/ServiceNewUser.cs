@@ -16,19 +16,20 @@ public class ServiceNewUser
 
     public void CreateUser()
     {
-        var data = DataToModel(userData);
+        var data = DataToModel();
         CheckNewUser(data.email, data.password);
-        Console.WriteLine("save");
+        
         SaveUser(data);
         
     }
     
-    private  ModelNewUser DataToModel(Stream data)
+    private  ModelNewUser DataToModel()
     {
-        using var reader = new StreamReader(data);
+        using var reader = new StreamReader(userData);
         var body = reader.ReadToEndAsync().Result;
         var userModel = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelNewUser>(body);
         userModel.joineDate = DateOnly.FromDateTime(DateTime.Now);
+        userModel.Addresses = new List<UserAddress>();
         
         return userModel;
     }
