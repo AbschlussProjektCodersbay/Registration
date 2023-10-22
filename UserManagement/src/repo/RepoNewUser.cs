@@ -8,14 +8,14 @@ public class RepoNewUser
 {
     private  static MongoClient? _connection;
     
-    private MongoClient? CreateClient()
+    private MongoClient CreateClient()
     {
         var settings = MongoClientSettings.FromConnectionString(Properties.mongodbConnectionString);
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);
         return new MongoClient(settings);
     } 
     
-    private MongoClient? GetConnection()
+    private MongoClient GetConnection()
     {
         
         if(_connection == null)

@@ -20,7 +20,6 @@ public class ServiceNewUser
         CheckNewUser(data.email, data.password);
         
         SaveUser(data);
-        
     }
     
     private  ModelNewUser DataToModel()
@@ -29,6 +28,7 @@ public class ServiceNewUser
         var body = reader.ReadToEndAsync().Result;
         var userModel = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelNewUser>(body);
         userModel.joineDate = DateOnly.FromDateTime(DateTime.Now);
+        userModel.prefertAddressIndex = 0;
         userModel.Addresses = new List<UserAddress>();
         
         return userModel;
