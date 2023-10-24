@@ -11,7 +11,6 @@ public class ModelNewUser
     public String Id{ get; set; }
     
     public string firstname { get; set; }
-    
     public string lastName { get; set; }
     public string email { get; set; }
     public string password { get; set; }

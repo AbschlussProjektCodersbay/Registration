@@ -42,7 +42,7 @@ public class ServiceAddAddressToUser
         var filter = Builders<ModelNewUser>.Filter.Eq(user => user.Id ,userId);
         var update = Builders<ModelNewUser>.Update.Set(user => user.Addresses, newAddress);
         connection.UpdateOne(filter, update);
-        Console.WriteLine("save");
+        
     }
     
     

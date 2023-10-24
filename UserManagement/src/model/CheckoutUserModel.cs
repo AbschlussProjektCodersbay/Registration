@@ -2,7 +2,7 @@
 
 public class CheckoutUserModel
 {
-    public string firstName;
-    public string lastName;
-    public UserAddress address;
+    public string firstName { get; set;}
+    public string lastName{ get; set;}
+    public UserAddress address{ get; set;}
 }

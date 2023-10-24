@@ -62,7 +62,7 @@ public class ValidateGetCheckout
     {
         var preferAddress = _users[0].prefertAddressIndex;
         Console.Write(preferAddress);
-        if (_users[0].Addresses.Count >= preferAddress || preferAddress < 0)
+        if (_users[0].Addresses.Count  <= preferAddress || preferAddress < 0)
         {
             throw new IndexNotInAddressRangeException();
         }

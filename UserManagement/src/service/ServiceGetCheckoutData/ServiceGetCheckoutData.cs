@@ -16,7 +16,7 @@ public class ServiceGetCheckoutData
         _userId = userId;
     }
 
-    public string GetData()
+    public CheckoutUserModel GetData()
     {
         var validateGetCheckout = new ValidateGetCheckout(_userId);
         validateGetCheckout.ValidateData();
@@ -24,7 +24,7 @@ public class ServiceGetCheckoutData
         var user = GetDataFromMongoDb();
         var checkoutData = DataToModel(user);
         var json = Newtonsoft.Json.JsonConvert.SerializeObject(checkoutData);
-        return json;
+        return checkoutData;
     }
 
     private ModelNewUser GetDataFromMongoDb()
