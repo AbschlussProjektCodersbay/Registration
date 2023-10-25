@@ -81,7 +81,7 @@ app.MapGet("/api/registration/DataForCheckOut/{userId}", (string userId) =>
     }
     catch (UserNotFoundException)
     {
-        return Results.Json("user not found", statusCode: 404);
+        return Results.Json("UserMG user not found", statusCode: 404);
     }
     catch (UserHaveNoAddressException)
     {
