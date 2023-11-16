@@ -7,6 +7,7 @@ using Registration.service.ServiceChangePreferredAddress;
 using Registration.service.ServiceChangePreferredAddress.Excepion;
 using Registration.service.ServiceGetCheckoutData;
 using Registration.service.ServiceGetCheckoutData.Exceptions;
+using Registration.service.ServiceLogin;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -92,9 +93,18 @@ app.MapGet("/api/registration/DataForCheckOut/{userId}", (string userId) =>
         return Results.Json("invalid preferred index", statusCode: 400);
     }
     
-    
-    
 });
+
+app.MapGet("/api/registration/checkLogin/", (HttpRequest request) =>
+{
+   
+    var serviceLogin = new ServiceLogin();
+    var checkUser = serviceLogin.CheckUser(request.Body);
+    return Results.Json($"isValid:{checkUser}");
+});
+    
+
+
 
 
 
