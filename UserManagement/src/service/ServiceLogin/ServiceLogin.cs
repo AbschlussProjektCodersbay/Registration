@@ -11,24 +11,23 @@ namespace Registration.service.ServiceLogin;
 
 public class ServiceLogin
 {
-
+    private string? UserId;
+    
     public bool CheckUser(Stream data)
     {
         try
         {
-            
-            
-
+            var userLoginData = dataToUser(data);
+            var passwordHash = findUser(userLoginData.email);
+            var isValid = HashManager.VerifyHash(userLoginData.password, passwordHash);
+            return isValid;
         }
         catch(System.Exception e)
         {
-            Console.WriteLine(e.Message);
+            Console.WriteLine(e);
             return false;
         }
-        var userLoginData = dataToUser(data);
-        var passwordHash = findUser(userLoginData.email);
-        var test = HashManager.VerifyHash(userLoginData.password, passwordHash);
-        return test;
+        
     }
 
     
@@ -40,13 +39,23 @@ public class ServiceLogin
         var collection = repo.GetUserCollection();
         var condition = Builders<ModelNewUser>.Filter.Eq((user) => user.email, email);
         var field = Builders<ModelNewUser>.Projection
-            .Include(p => p.password);
+            .Include(user => user.password)
+            .Include(user => user.Id);
         
         var results = collection.Find(condition).Project<ModelNewUser>(field).ToList();
         if (results.Count == 0)
         {
             throw new LoginNotValid();
         }
+        
+        
+        UserId = results[0].Id;
+        if (UserId == null)
+        {
+            Console.WriteLine("user have no Id");
+            throw new LoginNotValid();
+        }
+        
         return results[0].password;
     }
 
@@ -63,7 +72,9 @@ public class ServiceLogin
         return userModel;
         
     }
-    
-    
 
+    public string GetUserId()
+    {
+        return UserId;
+    }
 }

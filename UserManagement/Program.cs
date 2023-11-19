@@ -95,12 +95,11 @@ app.MapGet("/api/registration/DataForCheckOut/{userId}", (string userId) =>
     
 });
 
-app.MapGet("/api/registration/checkLogin/", (HttpRequest request) =>
+app.MapPost("/api/registration/checkLogin/", (HttpRequest request) =>
 {
-   
     var serviceLogin = new ServiceLogin();
     var checkUser = serviceLogin.CheckUser(request.Body);
-    return Results.Json($"isValid:{checkUser}");
+    return Results.Json(new{isValid = checkUser, userId = serviceLogin.GetUserId()});
 });
     
 

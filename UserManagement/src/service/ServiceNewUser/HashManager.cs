@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Registration.service;
 
-public class HashManager 
+public class HashManager
 {
  
     
@@ -25,10 +25,11 @@ public class HashManager
 
     public static bool VerifyHash( string input, string hash)
     {
-        var hashOfInput = System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(input));
-        Console.WriteLine("test1");
+        var hashOfInput = CreateHash(input);
+        
+        
         var comparer = StringComparer.OrdinalIgnoreCase;
-        return comparer.Compare(hashOfInput, hash) == 0;
+        return comparer.Compare(hash,hashOfInput) == 0;
     }
     
 }
