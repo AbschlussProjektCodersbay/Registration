@@ -30,7 +30,7 @@ public class ValidateGetCheckout
         var condition = Builders<ModelNewUser>.Filter.Eq((user) => user.Id, userId);
         var field = Builders<ModelNewUser>.Projection
             .Include(p => p.Addresses)
-            .Include(p => p.prefertAddressIndex);
+            .Include(p => p.preferredAddressIndex);
 
         try
         {
@@ -60,7 +60,7 @@ public class ValidateGetCheckout
 
     private void IsAddressInRange()
     {
-        var preferAddress = _users[0].prefertAddressIndex;
+        var preferAddress = _users[0].preferredAddressIndex;
         Console.Write(preferAddress);
         if (_users[0].Addresses.Count  <= preferAddress || preferAddress < 0)
         {

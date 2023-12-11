@@ -27,7 +27,7 @@ public class ServiceChangePreferredAddress
         var connection = repo.GetUserCollection();
         
         var filter = Builders<ModelNewUser>.Filter.Eq(user => user.Id ,userId);
-        var update = Builders<ModelNewUser>.Update.Set(user => user.prefertAddressIndex, addressIndex);
+        var update = Builders<ModelNewUser>.Update.Set(user => user.preferredAddressIndex, addressIndex);
         connection.UpdateOne(filter, update);
     }
 }

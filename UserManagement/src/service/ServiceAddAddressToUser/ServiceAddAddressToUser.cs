@@ -26,8 +26,9 @@ public class ServiceAddAddressToUser
     {
         using var reader = new StreamReader(this._addressData);
         var body = reader.ReadToEndAsync().Result;
+        Console.WriteLine(body);
         var addressData = Newtonsoft.Json.JsonConvert.DeserializeObject<UserAddress>(body);
-        Console.WriteLine($"level {addressData.level} street{addressData.street} zip{addressData.zip} houseNumber{addressData.houseNumber}");
+        
         return addressData;
     }
 

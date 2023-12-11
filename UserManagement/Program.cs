@@ -5,8 +5,10 @@ using Registration.service.Exception;
 using Registration.service.ServiceAddAddressToUser;
 using Registration.service.ServiceChangePreferredAddress;
 using Registration.service.ServiceChangePreferredAddress.Excepion;
+using Registration.service.ServiceGetAddress;
 using Registration.service.ServiceGetCheckoutData;
 using Registration.service.ServiceGetCheckoutData.Exceptions;
+using Registration.service.ServiceGetPreferredAddressIndex;
 using Registration.service.ServiceLogin;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +44,44 @@ app.MapPost("/api/registration/newUser",  (HttpRequest request) =>
     return Results.Json("Successful Registration",statusCode: 200);
 });
 
+app.MapGet("/api/registration/getAddress/{userId}", (string userId) =>
+{
+    var serviceGetAddress = new ServiceGetAddress();
+    try
+    {
+        var addresses = serviceGetAddress.GetAddresses(userId);
+        return Results.Json(addresses, statusCode: 200);
+    }
+    catch (UserNotFoundException)
+    {
+        return Results.Json("User user not found", statusCode: 404);
+    }
+    catch (UserHaveNoAddressException)
+    {
+        return Results.Json("user have no address", statusCode: 422);
+    }
+    
+});
+
+app.MapGet("/api/registration/GetPreferredAddressIndex/{userId}", (string userId) =>
+{
+    var serviceGetAddress = new ServiceGetPreferredAddressIndex();
+    try
+    {
+        var addressesIndex = serviceGetAddress.GetAddressesIndex(userId);
+        return Results.Json(addressesIndex, statusCode: 200);
+    }
+    catch (UserNotFoundException)
+    {
+        return Results.Json("User user not found", statusCode: 404);
+    }
+    catch (UserHaveNoAddressException)
+    {
+        return Results.Json("user have no address", statusCode: 422);
+    }
+    
+});
+
 
 app.MapPost("/api/registration/addAddress/{userId}", (HttpRequest request,string userId) =>
 {
@@ -66,9 +106,9 @@ app.MapPost("/api/registration/ChangePreferredAddress/{userId}/{addressIndex}", 
     {
         return Results.Json("Address out of range", statusCode: 400);
     }
-    
-    
-    return Results.Json("true",statusCode: 200);
+
+
+    return Results.StatusCode(200);
 });
 
 

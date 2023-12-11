@@ -16,6 +16,6 @@ public class ModelNewUser
     public string password { get; set; }
     public DateOnly joineDate { get; set; }
 
-    public int prefertAddressIndex { get; set; }
+    public int preferredAddressIndex { get; set; }
     public List<UserAddress> Addresses { get; set; }
 }

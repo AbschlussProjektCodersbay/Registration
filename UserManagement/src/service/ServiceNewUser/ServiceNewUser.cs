@@ -28,7 +28,7 @@ public class ServiceNewUser
         var body = reader.ReadToEndAsync().Result;
         var userModel = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelNewUser>(body);
         userModel.joineDate = DateOnly.FromDateTime(DateTime.Now);
-        userModel.prefertAddressIndex = 0;
+        userModel.preferredAddressIndex = 0;
 
         userModel.password = HashManager.CreateHash(userModel.password);
         userModel.Addresses = new List<UserAddress>();

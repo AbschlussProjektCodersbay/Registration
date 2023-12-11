@@ -36,7 +36,7 @@ public class ServiceGetCheckoutData
             .Include(p => p.Addresses)
             .Include(p => p.firstname)
             .Include(p => p.lastName)
-            .Include(p => p.prefertAddressIndex);
+            .Include(p => p.preferredAddressIndex);
 
         try
         {
@@ -55,7 +55,7 @@ public class ServiceGetCheckoutData
         {
             lastName = user.lastName,
             firstName = user.firstname,
-            address = user.Addresses[user.prefertAddressIndex]
+            address = user.Addresses[user.preferredAddressIndex]
         };
         return checkoutData;
     }
